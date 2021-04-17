@@ -13,6 +13,7 @@
 		mdiWeatherNight,
 	} from '@mdi/js';
 	import Svg from '@smui/common/Svg.svelte';
+	import { goto } from '@sapper/app';
 	import { Constants } from '../resources.js'
 
 	export let segment;
@@ -80,13 +81,17 @@
 		padding: 1em 0.5em;
 		display: block;
 	}
+
+	:global(#nav-title) {
+		cursor: pointer;
+	}
 </style>
 
 <TopAppBar bind:this={topAppBar} variant="standard" dense=true>
 	<Row>
 		<Section>
 			<IconButton class="material-icons">menu</IconButton>
-			<Title>{Constants.app.name}</Title>
+			<Title id="nav-title" on:click={() => goto('.')}>{Constants.app.name}</Title>
 			<ul>
 				<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
 				<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
