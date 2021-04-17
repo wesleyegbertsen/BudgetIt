@@ -1,7 +1,8 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "budgetit",
+  "description": "A Sapper app to control and get insights in your finances.",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
