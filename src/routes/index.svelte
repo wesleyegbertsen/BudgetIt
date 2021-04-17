@@ -1,5 +1,7 @@
 <script>
 	import successkid from 'images/successkid.jpg';
+	import { Label, Icon } from '@smui/common';
+	import Button from '@smui/button';
 </script>
 
 <style>
@@ -48,3 +50,8 @@
 </figure>
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+
+<Button on:click={() => console.log('Clicked!')}>
+	<Icon class="material-icons">favorite</Icon>
+	<Label>Icon</Label>
+</Button>
