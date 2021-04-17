@@ -4,8 +4,8 @@
 $background: #fff;
 
 @use '@material/theme' with (
-  $primary: color-palette.$purple-500,
-  $secondary: color-palette.$teal-600,
+  $primary: color-palette.$blue-500,
+  $secondary: color-palette.$blue-grey-600,
   $surface: #fff,
   $background: $background,
   $error: #b00020,
@@ -31,4 +31,11 @@ main {
   a:visited {
     color: color.scale(color-palette.$blue-500, $lightness: -50%);
   }
+}
+
+button.material-icons.dark_mode {
+  display: block;
+}
+button.material-icons.light_mode {
+  display: none;
 }
