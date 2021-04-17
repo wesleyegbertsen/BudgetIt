@@ -1,10 +1,10 @@
 @use 'sass:color';
 @use '@material/theme/color-palette';
 
-$background: #fff;
+$background: #333;
 
 @use '@material/theme' with (
-  $primary: color-palette.$purple-500,
+  $primary: color-palette.$blue-500,
   $secondary: color-palette.$teal-600,
   $surface: #fff,
   $background: $background,

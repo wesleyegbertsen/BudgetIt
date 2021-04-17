@@ -9,6 +9,7 @@ import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 import postcss from "rollup-plugin-postcss";
+import fs from 'fs';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -19,19 +20,31 @@ const onwarn = (warning, onwarn) =>
 	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
 	onwarn(warning);
 
-const postcssOptions = (extract) => ({
-   extensions: ['.scss'],
-   extract: extract ? 'smui.css' : false,
-   minimize: true,
-   use: [
-     [
-       'sass',
-       {
-         includePaths: ['./src/theme', './node_modules'],
-       },
-     ],
-   ],
- });
+const postcssOptions = (light) => ({
+  extensions: ['.scss'],
+  extract: `smui.css`,
+  minimize: true,
+  onExtract: light
+    ? null
+    : (getExtracted) => {
+        let { code } = getExtracted();
+        const result = require('cssnano')
+          .process(code, { from: undefined })
+          .then(({ css }) => {
+            const filename = `${config.client.output().dir}/smui-dark.css`;
+            fs.writeFileSync(filename, css);
+          });
+        return false;
+      },
+  use: [
+    [
+      'sass',
+      {
+        includePaths: [`./src/theme${light ? '' : '/dark'}`, './node_modules'],
+      },
+    ],
+  ],
+});
 
 export default {
 	client: {
