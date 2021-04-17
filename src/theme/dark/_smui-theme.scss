@@ -1,0 +1,34 @@
+@use 'sass:color';
+@use '@material/theme/color-palette';
+
+$background: #333;
+
+@use '@material/theme' with (
+  $primary: color-palette.$blue-500,
+  $secondary: color-palette.$teal-600,
+  $surface: #fff,
+  $background: $background,
+  $error: #b00020,
+);
+
+$color: if(theme.contrast-tone($background) == 'dark', #333, #eee);
+
+html,
+body {
+  background-color: $background;
+  color: $color;
+}
+
+nav a {
+  color: $color;
+}
+
+main {
+  a {
+    color: color-palette.$blue-500;
+  }
+
+  a:visited {
+    color: color.scale(color-palette.$blue-500, $lightness: -50%);
+  }
+}
