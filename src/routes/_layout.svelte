@@ -5,6 +5,7 @@
 		Title,
 		AutoAdjust,
 	} from '@smui/top-app-bar';
+	import Tooltip, { Wrapper } from '@smui/tooltip';
 	import IconButton from '@smui/icon-button';
 	import { Constants } from '../resources.js'
 
@@ -93,8 +94,14 @@
 			<IconButton class="material-icons" aria-label="Download">file_download</IconButton>
 			<IconButton class="material-icons" aria-label="Print this page">print</IconButton>
 			<IconButton class="material-icons" aria-label="Bookmark this page">bookmark</IconButton>
-			<IconButton on:click={() => switchTheme()} class="material-icons dark_mode" aria-label="Lights off">dark_mode</IconButton>
-			<IconButton on:click={() => switchTheme()} class="material-icons light_mode" aria-label="Lights on">light_mode</IconButton>
+			<Wrapper>
+				<IconButton on:click={() => switchTheme()} class="material-icons dark_mode" aria-label="Lights off">dark_mode</IconButton>
+				<Tooltip xPos="start" yPos="below">Lights off</Tooltip>
+			</Wrapper>
+			<Wrapper>
+				<IconButton on:click={() => switchTheme()} class="material-icons light_mode" aria-label="Lights on">light_mode</IconButton>
+				<Tooltip xPos="start" yPos="below">Lights on</Tooltip>
+			</Wrapper>
 		</Section>
 	</Row>
 </TopAppBar>

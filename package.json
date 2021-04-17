@@ -28,6 +28,7 @@
     "@smui/button": "^3.0.0-beta.10",
     "@smui/common": "^3.0.0-beta.10",
     "@smui/icon-button": "^3.0.0-beta.10",
+    "@smui/tooltip": "^3.0.0-beta.10",
     "@smui/top-app-bar": "^3.0.0-beta.10",
     "postcss": "^8.2.10",
     "rollup": "^2.3.4",
