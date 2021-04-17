@@ -7,6 +7,12 @@
 	} from '@smui/top-app-bar';
 	import Tooltip, { Wrapper } from '@smui/tooltip';
 	import IconButton from '@smui/icon-button';
+	import { Icon } from '@smui/common';
+	import {
+		mdiWeatherSunny,
+		mdiWeatherNight,
+	} from '@mdi/js';
+	import Svg from '@smui/common/Svg.svelte';
 	import { Constants } from '../resources.js'
 
 	export let segment;
@@ -95,12 +101,15 @@
 			<IconButton class="material-icons" aria-label="Print this page">print</IconButton>
 			<IconButton class="material-icons" aria-label="Bookmark this page">bookmark</IconButton>
 			<Wrapper>
-				<IconButton on:click={() => switchTheme()} class="material-icons dark_mode" aria-label="Lights off">dark_mode</IconButton>
-				<Tooltip xPos="start" yPos="below">Lights off</Tooltip>
-			</Wrapper>
-			<Wrapper>
-				<IconButton on:click={() => switchTheme()} class="material-icons light_mode" aria-label="Lights on">light_mode</IconButton>
-				<Tooltip xPos="start" yPos="below">Lights on</Tooltip>
+				<IconButton toggle pressed={lightTheme} on:MDCIconButtonToggle:change={switchTheme}>
+					<Icon component={Svg} viewBox="0 0 24 24" on>
+						<path fill="currentColor" d={mdiWeatherNight} />
+					</Icon>
+					<Icon component={Svg} viewBox="0 0 24 24">
+						<path fill="currentColor" d={mdiWeatherSunny} />
+					</Icon>
+				</IconButton>
+				<Tooltip xPos="start" yPos="below">{lightTheme ? 'Lights off' : 'Lights on'}</Tooltip>
 			</Wrapper>
 		</Section>
 	</Row>

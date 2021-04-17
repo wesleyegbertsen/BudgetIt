@@ -32,10 +32,3 @@ main {
     color: color.scale(color-palette.$blue-500, $lightness: -50%);
   }
 }
-
-button.material-icons.dark_mode {
-  display: none;
-}
-button.material-icons.light_mode {
-  display: block;
-}
