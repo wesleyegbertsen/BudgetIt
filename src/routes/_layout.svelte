@@ -9,8 +9,9 @@
 	import IconButton from '@smui/icon-button';
 	import { Icon } from '@smui/common';
 	import {
+		mdiCashRegister,
 		mdiWeatherSunny,
-		mdiWeatherNight,
+		mdiWeatherNight
 	} from '@mdi/js';
 	import Svg from '@smui/common/Svg.svelte';
 	import { goto } from '@sapper/app';
@@ -42,6 +43,15 @@
 		padding: 2em;
 		margin: 0 auto;
 		box-sizing: border-box;
+	}
+	:global(#nav-title) {
+		cursor: pointer;
+		display: flex;
+    	align-items: center;
+	}
+	:global(#nav-title svg) {
+		padding-right: 5px;
+		color: #F0E68C;
 	}
 
 	ul {
@@ -81,17 +91,19 @@
 		padding: 1em 0.5em;
 		display: block;
 	}
-
-	:global(#nav-title) {
-		cursor: pointer;
-	}
 </style>
 
 <TopAppBar bind:this={topAppBar} variant="standard" dense=true>
 	<Row>
 		<Section>
 			<IconButton class="material-icons">menu</IconButton>
-			<Title id="nav-title" on:click={() => goto('.')}>{Constants.app.name}</Title>
+			
+			<Title id="nav-title" on:click={() => goto('.')}>
+				<Icon component={Svg} viewBox="0 0 24 24" width=24 height=24>
+					<path fill="currentColor" d={mdiCashRegister} />
+				</Icon>
+				{Constants.app.name}
+			</Title>
 			<ul>
 				<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
 				<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
