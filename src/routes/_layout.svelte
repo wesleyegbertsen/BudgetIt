@@ -1,5 +1,5 @@
 <script>
-	import Nav from '../components/Nav.svelte';
+	import Header from '../components/Header.svelte';
 	import { AutoAdjust } from '@smui/top-app-bar';
 
 	export let segment;
@@ -18,7 +18,7 @@
 	}
 </style>
 
-<Nav {segment} bind:topAppBar/>
+<Header {segment} bind:topAppBar/>
 
 <AutoAdjust {topAppBar}>
 	<slot></slot>

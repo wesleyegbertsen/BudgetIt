@@ -28,12 +28,12 @@
 </script>
 
 <style>
-	:global(#nav-title) {
+	:global(#header-title) {
 		cursor: pointer;
 		display: flex;
     	align-items: center;
 	}
-	:global(#nav-title svg) {
+	:global(#header-title svg) {
 		padding-right: 5px;
 		color: #F0E68C;
 	}
@@ -82,7 +82,7 @@
 		<Section>
 			<IconButton class="material-icons">menu</IconButton>
 			
-			<Title id="nav-title" on:click={() => goto('.')}>
+			<Title id="header-title" on:click={() => goto('.')}>
 				<Icon component={Svg} viewBox="0 0 24 24" width=24 height=24>
 					<path fill="currentColor" d={mdiCashRegister} />
 				</Icon>
