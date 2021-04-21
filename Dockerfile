@@ -33,4 +33,4 @@ CMD ["node", "__sapper__/build"]
 # $ docker build . -t budgetit
 
 # Run instructions
-# $ docker run -p 3000:3000 budgetit
+# $ docker run -d -p 3000:3000 budgetit
