@@ -50,13 +50,13 @@ svg:focus {
 /* Track */
 ::-webkit-scrollbar-track {
 	background: transparent; 
-	margin: 53px 0 5px 0;
+	margin: 50px 0 5px 0;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
 	background: #888; 
-	border-radius: 10px;
+	border-radius: 12px;
 }
 
 /* Handle on hover */
@@ -73,7 +73,7 @@ svg:focus {
 ::-webkit-scrollbar-thumb:hover,
 ::-webkit-scrollbar-thumb:active
 {
-	border: 7px solid rgba(255,255,255,0);
+	border: 8px solid rgba(255,255,255,0);
     background-clip: padding-box;
 }
 

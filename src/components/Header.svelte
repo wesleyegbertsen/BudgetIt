@@ -110,7 +110,7 @@
 						<path fill="currentColor" d={mdiWeatherSunny} />
 					</Icon>
 				</IconButton>
-				<Tooltip xPos="start" yPos="below" style="margin-left: -40px;">{lightTheme ? 'Lights off' : 'Lights on'}</Tooltip>
+				<Tooltip xPos="start" yPos="below" style="margin-left: -38px;">{lightTheme ? 'Lights off' : 'Lights on'}</Tooltip>
 			</Wrapper>
 		</Section>
 	</Row>
