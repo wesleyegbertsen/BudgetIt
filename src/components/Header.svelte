@@ -67,7 +67,7 @@
 		height: 2px;
 		background-color: rgb(255,62,0);
 		display: block;
-		bottom: 4px;
+		bottom: 15px;
 	}
 
 	a {
@@ -77,7 +77,7 @@
 	}
 </style>
 
-<TopAppBar bind:this={topAppBar} variant="standard" dense=true>
+<TopAppBar bind:this={topAppBar}>
 	<Row>
 		<Section>
 			<IconButton class="material-icons">menu</IconButton>
@@ -110,7 +110,7 @@
 						<path fill="currentColor" d={mdiWeatherSunny} />
 					</Icon>
 				</IconButton>
-				<Tooltip xPos="start" yPos="below" style="margin-left: -38px;">{lightTheme ? 'Lights off' : 'Lights on'}</Tooltip>
+				<Tooltip xPos="start" yPos="below" style="margin-left: -30px; margin-top: -5px;">{lightTheme ? 'Lights off' : 'Lights on'}</Tooltip>
 			</Wrapper>
 		</Section>
 	</Row>
