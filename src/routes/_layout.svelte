@@ -1,6 +1,6 @@
 <script>
 	import Header from '../components/Header.svelte';
-	import { AutoAdjust } from '@smui/top-app-bar';
+	import { AutoAdjust } from '@smui/top-app-bar/styled';
 
 	export let segment;
 

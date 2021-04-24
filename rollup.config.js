@@ -23,13 +23,13 @@ const onwarn = (warning, onwarn) =>
 
 const postcssOptions = (light) => ({
   extensions: ['.scss'],
-  extract: `smui.css`,
+  extract: 'smui.css',
   minimize: true,
   onExtract: light
     ? null
     : (getExtracted) => {
         let { code } = getExtracted();
-        const result = require('cssnano')
+        require('cssnano')
           .process(code, { from: undefined })
           .then(({ css }) => {
             const filename = `${config.client.output().dir}/smui-dark.css`;

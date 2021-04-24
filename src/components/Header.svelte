@@ -1,9 +1,9 @@
 <script>
     import Svg from '@smui/common/Svg.svelte';
-    import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
-	import Tooltip, { Wrapper } from '@smui/tooltip';
-	import IconButton from '@smui/icon-button';
-	import { Icon } from '@smui/common';
+    import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar/styled';
+	import Tooltip, { Wrapper } from '@smui/tooltip/styled';
+	import IconButton from '@smui/icon-button/styled';
+	import { Icon } from '@smui/common/styled';
 	import { mdiCashRegister, mdiWeatherSunny, mdiWeatherNight } from '@mdi/js';
 	import { goto } from '@sapper/app';
 	import { Constants } from '../resources.js'
