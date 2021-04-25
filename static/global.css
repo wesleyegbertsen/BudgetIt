@@ -42,7 +42,12 @@ svg:focus {
 .mdc-top-app-bar {
 	z-index: 1;
 	box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-  }
+}
+
+.mdc-drawer--dismissible {
+	/*TODO: Hacky fix for dismissible drawer so it stays fixed when scrolling the app content*/
+	position: fixed;
+}
 
 /* #region Scrollbar */
 
@@ -55,6 +60,12 @@ svg:focus {
 ::-webkit-scrollbar-track {
 	background: transparent; 
 	margin: 69px 0 5px 0;
+}
+
+@media (max-width: 719px) {
+	::-webkit-scrollbar-track {
+		margin: 65px 0 5px 0;
+	}
 }
 
 /* Handle */

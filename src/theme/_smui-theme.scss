@@ -5,8 +5,11 @@ $background: #fff;
 
 @use '@material/theme' with (
   $primary: color-palette.$blue-500,
+  /*$on-primary: ,*/
   $secondary: color-palette.$blue-grey-600,
+  /*$on-secondary: ,*/
   $surface: #fff,
+  /*$on-surface: ,*/
   $background: $background,
   $error: #b00020,
 );
