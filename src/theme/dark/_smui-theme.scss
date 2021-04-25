@@ -1,12 +1,15 @@
 @use 'sass:color';
 @use '@material/theme/color-palette';
 
-$background: #333;
+$background: color-palette.$grey-900;
 
 @use '@material/theme' with (
-  $primary: color-palette.$blue-500,
-  $secondary: color-palette.$teal-600,
-  $surface: #fff,
+  $primary: color-palette.$blue-grey-500,
+  /*$on-primary: ,*/
+  $secondary: color-palette.$blue-grey-100,
+  /*$on-secondary: ,*/
+  $surface: color-palette.$grey-900,
+  $on-surface: color-palette.$blue-grey-100,
   $background: $background,
   $error: #b00020,
 );
@@ -19,16 +22,12 @@ body {
   color: $color;
 }
 
-nav a {
-  color: $color;
-}
-
 main {
   a {
     color: color-palette.$blue-500;
   }
 
   a:visited {
-    color: color.scale(color-palette.$blue-500, $lightness: -50%);
+    color: color.scale(color-palette.$blue-500, $lightness: -40%);
   }
 }

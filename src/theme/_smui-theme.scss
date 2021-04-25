@@ -4,9 +4,12 @@
 $background: #fff;
 
 @use '@material/theme' with (
-  $primary: color-palette.$purple-500,
-  $secondary: color-palette.$teal-600,
+  $primary: color-palette.$blue-500,
+  /*$on-primary: ,*/
+  $secondary: color-palette.$blue-grey-600,
+  /*$on-secondary: ,*/
   $surface: #fff,
+  /*$on-surface: ,*/
   $background: $background,
   $error: #b00020,
 );
@@ -16,10 +19,6 @@ $color: if(theme.contrast-tone($background) == 'dark', #333, #eee);
 html,
 body {
   background-color: $background;
-  color: $color;
-}
-
-nav a {
   color: $color;
 }
 

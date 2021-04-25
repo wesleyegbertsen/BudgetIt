@@ -1,21 +1,6 @@
 <script>
 	import successkid from 'images/successkid.jpg';
-	import { Label, Icon } from '@smui/common';
-	import Button from '@smui/button';
-
-	let lightTheme = typeof window === 'undefined' || window.matchMedia('(prefers-color-scheme: light)').matches;
-
-	function switchTheme() {
-		lightTheme = !lightTheme;
-		let themeLink = document.head.querySelector('#theme');
-		if (!themeLink) {
-			themeLink = document.createElement('link');
-			themeLink.rel = 'stylesheet';
-			themeLink.id = 'theme';
-		}
-		themeLink.href = `client/smui${lightTheme ? '' : '-dark'}.css`;
-		document.head.appendChild(themeLink);
-	}
+	import LoremIpsum from '../components/LoremIpsum.svelte';
 </script>
 
 <style>
@@ -65,7 +50,4 @@
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
 
-<Button on:click={() => switchTheme()}>
-	<Icon class="material-icons">dark_mode</Icon>
-	<Label>Switch theme</Label>
-</Button>
+<LoremIpsum/><LoremIpsum/>

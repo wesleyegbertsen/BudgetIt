@@ -4,6 +4,7 @@ import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import url from '@rollup/plugin-url';
 import svelte from 'rollup-plugin-svelte';
+import sveltePreprocess from 'svelte-preprocess';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
@@ -22,13 +23,13 @@ const onwarn = (warning, onwarn) =>
 
 const postcssOptions = (light) => ({
   extensions: ['.scss'],
-  extract: `smui.css`,
+  extract: 'smui.css',
   minimize: true,
   onExtract: light
     ? null
     : (getExtracted) => {
         let { code } = getExtracted();
-        const result = require('cssnano')
+        require('cssnano')
           .process(code, { from: undefined })
           .then(({ css }) => {
             const filename = `${config.client.output().dir}/smui-dark.css`;
@@ -46,6 +47,13 @@ const postcssOptions = (light) => ({
   ],
 });
 
+const preprocess = sveltePreprocess({
+	sourceMap: dev,
+	defaults: {
+		style: 'scss'
+	}
+});
+
 export default {
 	client: {
 		input: config.client.input(),
@@ -59,6 +67,7 @@ export default {
 				},
 			}),
 			svelte({
+				preprocess,
 				compilerOptions: {
 					dev,
 					hydratable: true
@@ -113,6 +122,7 @@ export default {
 				},
 			}),
 			svelte({
+				preprocess,
 				compilerOptions: {
 					dev,
 					generate: 'ssr',
