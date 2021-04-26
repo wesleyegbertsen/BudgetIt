@@ -1,7 +1,6 @@
 const Constants = {
     app: {
-        name: 'BudgetIt',
-        description: 'Control your finances!'
+        name: 'BudgetIt'
     },
     ui: {
         minimumDesktopWidth: 720

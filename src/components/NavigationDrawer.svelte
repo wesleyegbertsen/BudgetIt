@@ -1,5 +1,6 @@
 <script>
-	import { Constants } from '../resources.js'
+	import { _, locale, locales } from 'svelte-i18n';
+	import { Constants } from '../resources.js';
 	import { onMount } from 'svelte';
 	import Drawer, {
 		Content,
@@ -35,37 +36,34 @@
 <Drawer variant="{innerWidth >= Constants.ui.minimumDesktopWidth ? 'dismissible' : 'modal'}" bind:open>
 	<Header>
 		<Title>{Constants.app.name}</Title>
-		<Subtitle>{Constants.app.description}</Subtitle>
+		<Subtitle>{$_('app.description')}</Subtitle>
 	</Header>
 	<Content>
 		<List>
 		<Item href="." activated={segment === undefined}>
 			<Graphic class="material-icons" aria-hidden="true">home</Graphic>
-			<Text>Home</Text>
+			<Text>{$_('nav.home')}</Text>
 		</Item>
 		<Item href="about" activated={segment === 'about'}>
 			<Graphic class="material-icons" aria-hidden="true">info</Graphic>
-			<Text>About</Text>
+			<Text>{$_('nav.about')}</Text>
 		</Item>
 		<Item rel=prefetch href="blog" activated={segment === 'blog'}>
 			<Graphic class="material-icons" aria-hidden="true">message</Graphic>
-			<Text>Blog</Text>
+			<Text>{$_('nav.blog')}</Text>
 		</Item>
 
-		<!--<Separator />
-		<Subheader component={H6}>Labels</Subheader>
-		<Item href="javascript:void(0)" on:click={() => setActiveDrawerItem('Family')} activated={segment === 'Family'}>
-			<Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
-			<Text>Family</Text>
-		</Item>
-		<Item href="javascript:void(0)" on:click={() => setActiveDrawerItem('Friends')} activated={segment === 'Friends'}>
-			<Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
-			<Text>Friends</Text>
-		</Item>
-		<Item href="javascript:void(0)" on:click={() => setActiveDrawerItem('Work')} activated={segment === 'Work'}>
-			<Graphic class="material-icons" aria-hidden="true">bookmark</Graphic>
-			<Text>Work</Text>
-		</Item>-->
+		<Separator />
+
+		<Subheader component={H6}>{$_('nav.languages')}</Subheader>
+
+		{#each $locales as item}
+			<Item href="javascript:void(0)" on:click={() => ($locale = item)} activated={$locale.includes(item)}>
+				<Graphic class="material-icons" aria-hidden="true">language</Graphic>
+				<Text>{$_('languages.' + item.replace('-', '_'))}</Text>
+			</Item>
+		{/each}
+
 		</List>
 	</Content>
 </Drawer>

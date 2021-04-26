@@ -1,4 +1,5 @@
 <script>
+	import { _ } from 'svelte-i18n'
 	import successkid from 'images/successkid.jpg';
 	import LoremIpsum from '../components/LoremIpsum.svelte';
 </script>
@@ -38,16 +39,16 @@
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>{$_('title.index')}</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<h1>{$_('messages.success')}</h1>
 
 <figure>
 	<img alt="Success Kid" src="{successkid}">
-	<figcaption>Have fun with Sapper!</figcaption>
+	<figcaption>{$_('messages.have_fun')}</figcaption>
 </figure>
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<p><strong>{$_('messages.try_editing')}</strong></p>
 
 <LoremIpsum/><LoremIpsum/>

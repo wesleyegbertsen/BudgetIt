@@ -1,0 +1,36 @@
+{
+  "title": {
+    "index": "BudgetIt",
+    "about": "About",
+    "blog": "Blog"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "languages": "Languages"
+  },
+  "messages": {
+    "error": "Error: {status}",
+    "success": "Great success!",
+    "have_fun": "Have fun with Sapper!",
+    "try_editing": "Try editing this file (src/routes/index.svelte) to test live reloading."
+  },
+  "languages": {
+    "en": "English",
+    "nl_NL": "Dutch"
+  },
+  "direction": "ltr",
+  "routes": {
+    "about": {
+      "h1": "About this site",
+      "p": "This is the 'about' page. There's not much here."
+    },
+    "blog": {
+      "h1": "Recent posts"
+    }
+  },
+  "app": {
+    "description": "Control your finances!"
+  }
+}

@@ -7,6 +7,8 @@
 </script>
 
 <script>
+	import { _ } from 'svelte-i18n';
+
 	export let posts;
 </script>
 
@@ -18,10 +20,10 @@
 </style>
 
 <svelte:head>
-	<title>Blog</title>
+	<title>{$_('title.blog')}</title>
 </svelte:head>
 
-<h1>Recent posts</h1>
+<h1>{$_('routes.blog.h1')}</h1>
 
 <ul>
 	{#each posts as post}

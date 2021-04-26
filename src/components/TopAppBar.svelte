@@ -1,4 +1,5 @@
 <script>
+	import { _ } from 'svelte-i18n'
     import Svg from '@smui/common/Svg.svelte';
     import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar/styled';
 	import Tooltip, { Wrapper } from '@smui/tooltip/styled';
