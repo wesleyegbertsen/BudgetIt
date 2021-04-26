@@ -51,7 +51,7 @@
 		<Title>{Constants.app.name}</Title>
 		<Subtitle>{$_('app.description')}</Subtitle>
 	</Header>
-	<Content>
+	<Content><!--FIXME:Clicking items doesn't update <slot> with route, only updates URL (When <slot> is moved outside of <AppContent> it does work)-->
 		<List>
 		<Item href="." activated={segment === undefined}>
 			<Graphic class="material-icons" aria-hidden="true">home</Graphic>
