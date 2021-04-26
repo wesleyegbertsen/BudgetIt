@@ -11,6 +11,7 @@
 	} from '@smui/drawer/styled';
 	import List, { Item, Text, Graphic, Separator, Subheader } from '@smui/list/styled';
 	import H6 from '@smui/common/H6.svelte';
+	import CountryFlagIcon from '../components/CountryFlagIcon.svelte';
 
 	export let segment;
     export let open;
@@ -29,7 +30,19 @@
 			.querySelector('.mdc-top-app-bar section[role=toolbar]')
 			.style.marginRight = (open && innerWidth >= Constants.ui.minimumDesktopWidth) ? '256px' : '0';
 	}
+
+	function handleLanguageClick(language) {
+		$locale = language;
+		open = isDesktopView();
+	}
 </script>
+
+<style>
+	div :global(.flag-icon) {
+		width: 18px;
+    	margin-right: 10px;
+	}
+</style>
 
 <svelte:window bind:innerWidth/>
 
@@ -58,8 +71,8 @@
 		<Subheader component={H6}>{$_('nav.languages')}</Subheader>
 
 		{#each $locales as item}
-			<Item href="javascript:void(0)" on:click={() => ($locale = item)} activated={$locale.includes(item)}>
-				<Graphic class="material-icons" aria-hidden="true">language</Graphic>
+			<Item href="javascript:void(0)" on:click={handleLanguageClick(item)} activated={$locale.includes(item)}>
+				<div><CountryFlagIcon class="flag-icon" language={item} /></div>
 				<Text>{$_('languages.' + item.replace('-', '_'))}</Text>
 			</Item>
 		{/each}
