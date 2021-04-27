@@ -19,7 +19,8 @@
     "about": "Over",
     "blog": "Blog",
     "home": "Home",
-    "languages": "Talen"
+    "language": "Taal",
+    "options": "Opties"
   },
   "routes": {
     "about": {

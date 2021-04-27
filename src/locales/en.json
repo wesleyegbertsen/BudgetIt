@@ -19,7 +19,8 @@
     "about": "About",
     "blog": "Blog",
     "home": "Home",
-    "languages": "Languages"
+    "language": "Language",
+    "options": "Options"
   },
   "routes": {
     "about": {

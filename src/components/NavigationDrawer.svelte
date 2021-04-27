@@ -10,6 +10,8 @@
 		Scrim,
 	} from '@smui/drawer/styled';
 	import List, { Item, Text, Graphic, Separator, Subheader } from '@smui/list/styled';
+	import Select, { Option } from '@smui/select/styled';
+	import Icon from '@smui/select/icon/styled';
 	import H6 from '@smui/common/H6.svelte';
 	import CountryFlagIcon from '../components/CountryFlagIcon.svelte';
 
@@ -22,7 +24,9 @@
 	onMount(async () => {
 		open = isDesktopView();
 	});
-	$: segment, open = isDesktopView();
+
+	//When segment or $locale value changes, update navigation drawer open state
+	$: segment, $locale, open = isDesktopView();
 
 	//TODO: Hacky fix so the margin-right on the AppContent caused by the Drawer, doesn't cause the toolbar section of the TopAppBar to go out of view
 	$: if (typeof window !== 'undefined' && (open || !open) && innerWidth) {
@@ -30,18 +34,28 @@
 			.querySelector('.mdc-top-app-bar section[role=toolbar]')
 			.style.marginRight = (open && innerWidth >= Constants.ui.minimumDesktopWidth) ? '256px' : '0';
 	}
-
-	function handleLanguageClick(language) {
-		$locale = language;
-		open = isDesktopView();
-	}
 </script>
 
 <style>
-	div :global(.flag-icon) {
-		width: 18px;
-    	margin-right: 10px;
-    	margin-top: 4px;
+	div {
+		:global(.flag-icon) {
+			width: 18px;
+			margin-right: 10px;
+			margin-top: 5px;
+		}
+
+		:global(.language-selector) {
+			display: flex;
+			margin: 8px;
+			padding: 0 8px 0 8px;
+		}
+
+		:global(.language-selector.nl-NL ul),
+		:global(.language-selector.nl-BE ul) {
+			:global(span[value="en-GB"]) {
+				font-size: 13.3px;
+			}
+		}
 	}
 </style>
 
@@ -69,14 +83,18 @@
 
 		<Separator />
 
-		<Subheader component={H6}>{$_('nav.languages')}</Subheader>
+		<Subheader component={H6}>{$_('nav.options')}</Subheader>
 
-		{#each $locales as item}
-			<Item href="javascript:void(0)" on:click={handleLanguageClick(item)} activated={$locale.includes(item)}>
-				<div><CountryFlagIcon class="flag-icon" language={item} /></div>
-				<Text>{$_('languages.' + item.replace('-', '_'))}</Text>
-			</Item>
-		{/each}
+		<!--FIXME: Selected value doesn't get updated to new language locale value right away-->
+		<div><Select bind:value={$locale} label="{$_('nav.language')}" class="language-selector {$locale}">
+			<Icon class="material-icons" slot="leadingIcon">language</Icon>
+			{#each $locales as item}
+				<Option value={item}>
+					<div><CountryFlagIcon class="flag-icon" language={item} /></div>
+					{$_('languages.' + item.replace('-', '_'))}
+				</Option>
+			{/each}
+		</Select></div>
 
 		</List>
 	</Content>
