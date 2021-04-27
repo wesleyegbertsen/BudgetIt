@@ -35,6 +35,10 @@ code {
 	}
 }
 
+.rtl {
+	direction: rtl;
+}
+
 svg:focus {
 	outline: none;
 }

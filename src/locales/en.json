@@ -1,4 +1,5 @@
 {
+  "direction": "ltr",
   "title": {
     "index": "BudgetIt",
     "about": "About",
@@ -21,7 +22,6 @@
     "en_GB": "English (United Kingdom)",
     "nl_NL": "Dutch"
   },
-  "direction": "ltr",
   "routes": {
     "about": {
       "h1": "About this site",

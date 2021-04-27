@@ -1,4 +1,5 @@
 {
+  "direction": "ltr",
   "title": {
     "index": "BudgetIt",
     "about": "Over",
@@ -21,7 +22,6 @@
     "en_GB": "Engels (Verenigd Koninkrijk)",
     "nl_NL": "Nederlands"
   },
-  "direction": "ltr",
   "routes": {
     "about": {
       "h1": "Over deze site",

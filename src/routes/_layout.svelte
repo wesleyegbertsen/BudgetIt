@@ -1,4 +1,5 @@
 <script context="module">
+	import { _ } from 'svelte-i18n';
 	import { isLoading, waitLocale } from 'svelte-i18n';
 	
 	export async function preload(page) {
@@ -37,7 +38,7 @@
 {:else}
 	<NavigationDrawer {segment} bind:open />
 
-	<AppContent>
+	<AppContent class="{$_('direction')}">
 		<TopAppBar bind:topAppBar on:click={() => (open = !open)}/>
 		<AutoAdjust {topAppBar}>
 			<slot/>
