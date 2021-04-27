@@ -17,7 +17,8 @@
     "try_editing": "Try editing this file (src/routes/index.svelte) to test live reloading."
   },
   "languages": {
-    "en": "English",
+    "en_US": "English (United States)",
+    "en_GB": "English (United Kingdom)",
     "nl_NL": "Dutch"
   },
   "direction": "ltr",

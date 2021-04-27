@@ -17,7 +17,8 @@
     "try_editing": "Probeer dit bestand (src/routes/index.svelte) te bewerken om live herladen te testen."
   },
   "languages": {
-    "en": "Engels",
+    "en_US": "Engels (Verenigde Staten)",
+    "en_GB": "Engels (Verenigd Koninkrijk)",
     "nl_NL": "Nederlands"
   },
   "direction": "ltr",

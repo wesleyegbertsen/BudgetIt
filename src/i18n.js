@@ -8,16 +8,25 @@ import {
 import { setCookie, getCookie } from './modules/cookie.js';
 
 const INIT_OPTIONS = {
-	fallbackLocale: 'en',
+	fallbackLocale: 'en-US',
 	initialLocale: null,
 	loadingDelay: 200,
-	formats: {},
+	formats: {
+		number: {//https://en.wikipedia.org/wiki/ISO_4217
+			USD: { style: 'currency', currency: 'USD' },
+			GBP: { style: 'currency', currency: 'GBP' },
+			EUR: { style: 'currency', currency: 'EUR' }
+		}
+	},
 	warnOnMissingMessages: true,
 };
 
 let currentLocale = null;
 
-register('en', () => import('./locales/en.json'));
+//TODO: Might want to give en-US and en-GB a separate locale dictionary, since there are some nuanced differences.
+//https://stackoverflow.com/a/9713377
+register('en-US', () => import('./locales/en.json'));
+register('en-GB', () => import('./locales/en.json'));
 register('nl-NL', () => import('./locales/nl-NL.json'));
 
 $locale.subscribe((value) => {

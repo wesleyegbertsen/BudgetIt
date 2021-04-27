@@ -6,8 +6,9 @@ const Constants = {
         minimumDesktopWidth: 720
     },
     countryFlagForLanguage: {
-        nl_NL: "NL",
-        en: "GB"
+        en_US: "US",
+        en_GB: "GB",
+        nl_NL: "NL"
     }
 }
 export { Constants };
