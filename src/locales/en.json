@@ -1,26 +1,25 @@
 {
-  "direction": "ltr",
-  "title": {
-    "index": "BudgetIt",
-    "about": "About",
-    "blog": "Blog"
+  "app": {
+    "description": "Control your finances!"
   },
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "blog": "Blog",
-    "languages": "Languages"
+  "direction": "ltr",
+  "languages": {
+    "en_GB": "English (United Kingdom)",
+    "en_US": "English (United States)",
+    "nl_NL": "Dutch (Netherlands)",
+    "nl_BE": "Dutch (Belgium)"
   },
   "messages": {
     "error": "Error: {status}",
-    "success": "Great success!",
     "have_fun": "Have fun with Sapper!",
+    "success": "Great success!",
     "try_editing": "Try editing this file (src/routes/index.svelte) to test live reloading."
   },
-  "languages": {
-    "en_US": "English (United States)",
-    "en_GB": "English (United Kingdom)",
-    "nl_NL": "Dutch"
+  "nav": {
+    "about": "About",
+    "blog": "Blog",
+    "home": "Home",
+    "languages": "Languages"
   },
   "routes": {
     "about": {
@@ -31,8 +30,10 @@
       "h1": "Recent posts"
     }
   },
-  "app": {
-    "description": "Control your finances!"
+  "title": {
+    "about": "About",
+    "blog": "Blog",
+    "index": "BudgetIt"
   },
   "topAppBar": {
     "lightsOff": "Lights off",

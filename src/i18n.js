@@ -23,11 +23,12 @@ const INIT_OPTIONS = {
 
 let currentLocale = null;
 
-//TODO: Might want to give en-US and en-GB a separate locale dictionary, since there are some nuanced differences.
+//TODO: Might want to give en-US and en-GB && nl-NL and nl-BE a separate locale dictionary, since there are some nuanced differences.
 //https://stackoverflow.com/a/9713377
 register('en-US', () => import('./locales/en.json'));
 register('en-GB', () => import('./locales/en.json'));
-register('nl-NL', () => import('./locales/nl-NL.json'));
+register('nl-NL', () => import('./locales/nl.json'));
+register('nl-BE', () => import('./locales/nl.json'));
 
 $locale.subscribe((value) => {
 	if (value == null) return;

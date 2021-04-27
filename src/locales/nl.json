@@ -1,0 +1,42 @@
+{
+  "app": {
+    "description": "Beheer je financiën!"
+  },
+  "direction": "ltr",
+  "languages": {
+    "en_GB": "Engels (Verenigd Koninkrijk)",
+    "en_US": "Engels (Verenigde Staten)",
+    "nl_NL": "Nederlands (Nederland)",
+    "nl_BE": "Nederlands (België)"
+  },
+  "messages": {
+    "error": "Error: {status}",
+    "have_fun": "Veel plezier met Sapper!",
+    "success": "Groot succes!",
+    "try_editing": "Probeer dit bestand (src/routes/index.svelte) te bewerken om live herladen te testen."
+  },
+  "nav": {
+    "about": "Over",
+    "blog": "Blog",
+    "home": "Home",
+    "languages": "Talen"
+  },
+  "routes": {
+    "about": {
+      "h1": "Over deze site",
+      "p": "Dit is de 'over' pagina. Er is hier niet veel."
+    },
+    "blog": {
+      "h1": "Recente berichten"
+    }
+  },
+  "title": {
+    "about": "Over",
+    "blog": "Blog",
+    "index": "BudgetIt"
+  },
+  "topAppBar": {
+    "lightsOff": "Lichten uit",
+    "lightsOn": "Lichten aan"
+  }
+}

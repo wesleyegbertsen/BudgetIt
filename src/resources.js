@@ -8,7 +8,8 @@ const Constants = {
     countryFlagForLanguage: {
         en_US: "US",
         en_GB: "GB",
-        nl_NL: "NL"
+        nl_NL: "NL",
+        nl_BE: "BE"
     }
 }
 export { Constants };
