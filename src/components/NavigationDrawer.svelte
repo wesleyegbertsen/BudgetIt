@@ -41,6 +41,7 @@
 	div :global(.flag-icon) {
 		width: 18px;
     	margin-right: 10px;
+    	margin-top: 4px;
 	}
 </style>
 

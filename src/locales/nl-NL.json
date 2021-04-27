@@ -32,5 +32,9 @@
   },
   "app": {
     "description": "Beheer je financiën!"
+  },
+  "topAppBar": {
+    "lightsOff": "Lichten uit",
+    "lightsOn": "Lichten aan"
   }
 }

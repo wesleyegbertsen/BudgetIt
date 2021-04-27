@@ -32,5 +32,9 @@
   },
   "app": {
     "description": "Control your finances!"
+  },
+  "topAppBar": {
+    "lightsOff": "Lights off",
+    "lightsOn": "Lights on"
   }
 }

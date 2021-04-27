@@ -64,7 +64,7 @@
 						<path fill="currentColor" d={mdiWeatherSunny} />
 					</Icon>
 				</IconButton>
-				<Tooltip xPos="start" yPos="below" style="margin-left: -30px; margin-top: -5px;">{lightTheme ? 'Lights off' : 'Lights on'}</Tooltip>
+				<Tooltip xPos="start" yPos="below" style="margin-left: -30px; margin-top: -5px;">{lightTheme ? $_('topAppBar.lightsOff') : $_('topAppBar.lightsOn')}</Tooltip>
 			</Wrapper>
 		</Section>
 	</Row>

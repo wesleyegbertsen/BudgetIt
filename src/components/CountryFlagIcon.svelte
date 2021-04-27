@@ -1,11 +1,13 @@
 <script>
     //https://www.npmjs.com/package/country-flag-icons
+    //https://catamphetamine.gitlab.io/country-flag-icons/3x2/
+    //https://stackoverflow.com/a/65627412
 
     import { Constants } from '../resources.js';
+    import CountryFlags from 'images/country-flags';
     
     export let country;
     export let language;
-    export let size = "3x2";//3x2 or 1x1
 	export { clazz as class };
 
     let clazz;
@@ -18,4 +20,4 @@
 <img 
     class={clazz || ''}
     alt="{country}"
-    src="http://purecatamphetamine.github.io/country-flag-icons/{size}/{country}.svg"/>
+    src="{CountryFlags[country]}"/>
