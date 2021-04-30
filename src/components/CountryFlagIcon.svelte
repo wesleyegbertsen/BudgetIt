@@ -3,7 +3,7 @@
     //https://catamphetamine.gitlab.io/country-flag-icons/3x2/
     //https://stackoverflow.com/a/65627412
 
-    import { CONSTANTS } from '../constants.js';
+    import { CONSTANTS_LOCALES } from '../constants.js';
     import CountryFlags from 'images/country-flags';
     
     export let country;
@@ -13,7 +13,7 @@
     let clazz;
 
     if (!country && locale) {
-        country = CONSTANTS.locales[locale.replace('-', '_')].country;
+        country = CONSTANTS_LOCALES[locale.replace('-', '_')].country;
     }
 </script>
 

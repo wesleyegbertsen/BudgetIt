@@ -1,7 +1,7 @@
 <script>
 	import { _, locale, locales } from 'svelte-i18n';
 	import { setCookie, getCookie } from '../modules/cookie.js';
-	import { CONSTANTS } from '../constants.js';
+	import { CONSTANTS_UI, CONSTANTS_APP, CONSTANTS_CURRENCIES } from '../constants.js';
 	import { onMount } from 'svelte';
 	import Drawer, {
 		Content,
@@ -20,7 +20,7 @@
     export let open;
 
 	let innerWidth;
-	let isDesktopView = () => innerWidth >= CONSTANTS.ui.minimumDesktopWidth;
+	let isDesktopView = () => innerWidth >= CONSTANTS_UI.minimumDesktopWidth;
 	let currency = getCookie('currency');
 
 	onMount(async () => {
@@ -41,7 +41,7 @@
 	$: if (typeof window !== 'undefined' && (open || !open) && innerWidth) {
 		document
 			.querySelector('.mdc-top-app-bar section[role=toolbar]')
-			.style.marginRight = (open && innerWidth >= CONSTANTS.ui.minimumDesktopWidth) ? '256px' : '0';
+			.style.marginRight = (open && innerWidth >= CONSTANTS_UI.minimumDesktopWidth) ? '256px' : '0';
 	}
 </script>
 
@@ -70,9 +70,9 @@
 
 <svelte:window bind:innerWidth/>
 
-<Drawer variant="{innerWidth >= CONSTANTS.ui.minimumDesktopWidth ? 'dismissible' : 'modal'}" bind:open>
+<Drawer variant="{innerWidth >= CONSTANTS_UI.minimumDesktopWidth ? 'dismissible' : 'modal'}" bind:open>
 	<Header>
-		<Title>{CONSTANTS.app.name}</Title>
+		<Title>{CONSTANTS_APP.name}</Title>
 		<Subtitle>{$_('app.description')}</Subtitle>
 	</Header>
 	<Content><!--FIXME:Clicking items doesn't update <slot> with route, only updates URL (When <slot> is moved outside of <AppContent> it does work)-->
@@ -107,7 +107,7 @@
 		</Select>
 		<Select bind:value={currency} label="Currency">
 			<Icon class="material-icons" slot="leadingIcon">payments</Icon>
-			{#each Object.values(CONSTANTS.currencies) as currency}
+			{#each Object.values(CONSTANTS_CURRENCIES) as currency}
 				<Option value={currency.code}>{currency.code} - {currency.symbol}</Option>
 			{/each}
 		</Select>
@@ -118,6 +118,6 @@
 </Drawer>
 
 <!--FIXME: Clicking Scrim when initial innerWidth is less than or equal to minimumDesktopWidth, won't dismiss navigation drawer-->
-{#if innerWidth <= CONSTANTS.ui.minimumDesktopWidth}
+{#if innerWidth <= CONSTANTS_UI.minimumDesktopWidth}
 	<Scrim/>
 {/if}

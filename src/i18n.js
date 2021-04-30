@@ -6,14 +6,14 @@ import {
 } from 'svelte-i18n';
 
 import { setCookie, getCookie } from './modules/cookie.js';
-import { CONSTANTS } from './constants.js';
+import { CONSTANTS_LOCALES, CONSTANTS_CURRENCIES, CONSTANTS_COOKIES } from './constants.js';
 
 //Creating a list of number formats for i18n based of all defined currencies in CONSTANTS 
 let numberFormats = {};
-Object.values(CONSTANTS.currencies).forEach(currency => numberFormats[currency.code] = {style: 'currency', currency: currency.code});
+Object.values(CONSTANTS_CURRENCIES).forEach(currency => numberFormats[currency.code] = {style: 'currency', currency: currency.code});
 
 const INIT_OPTIONS = {
-	fallbackLocale: CONSTANTS.locales.en_US.code,
+	fallbackLocale: CONSTANTS_LOCALES.en_US.code,
 	initialLocale: null,
 	loadingDelay: 200,
 	formats: {number: numberFormats},
@@ -26,10 +26,10 @@ let currentLocale = null;
 //https://stackoverflow.com/a/9713377
 //Dynamic imports don't work, so the commented-out code below doesn't work
 //Object.values(CONSTANTS.locales).forEach(locale => register(locale.code, () => import(`./locales/${locale.lang}.json`)));
-register(CONSTANTS.locales.en_US.code, () => import('./locales/en.json'));
-register(CONSTANTS.locales.en_GB.code, () => import('./locales/en.json'));
-register(CONSTANTS.locales.nl_NL.code, () => import('./locales/nl.json'));
-register(CONSTANTS.locales.nl_BE.code, () => import('./locales/nl.json'));
+register(CONSTANTS_LOCALES.en_US.code, () => import('./locales/en.json'));
+register(CONSTANTS_LOCALES.en_GB.code, () => import('./locales/en.json'));
+register(CONSTANTS_LOCALES.nl_NL.code, () => import('./locales/nl.json'));
+register(CONSTANTS_LOCALES.nl_BE.code, () => import('./locales/nl.json'));
 
 $locale.subscribe((value) => {
 	if (value == null) return;
@@ -38,21 +38,21 @@ $locale.subscribe((value) => {
 
 	// if running in the client, save the language preference in a cookie
 	if (typeof window !== 'undefined') {
-		setCookie(CONSTANTS.cookies.locale, value);
-		if (!getCookie(CONSTANTS.cookies.currency)) {
-			setCookie(CONSTANTS.cookies.currency, DefaultCurrencyForLocale(value));
+		setCookie(CONSTANTS_COOKIES.locale, value);
+		if (!getCookie(CONSTANTS_COOKIES.currency)) {
+			setCookie(CONSTANTS_COOKIES.currency, DefaultCurrencyForLocale(value));
 		}
 	}
 });
 
 function DefaultCurrencyForLocale(locale) {
 	switch(locale) {
-		case CONSTANTS.locales.en_US.code:
+		case CONSTANTS_LOCALES.en_US.code:
 			return numberFormats.USD.currency;
-		case CONSTANTS.locales.en_GB.code:
+		case CONSTANTS_LOCALES.en_GB.code:
 			return numberFormats.GBP.currency;
-		case CONSTANTS.locales.nl_NL.code:
-		case CONSTANTS.locales.nl_BE.code:
+		case CONSTANTS_LOCALES.nl_NL.code:
+		case CONSTANTS_LOCALES.nl_BE.code:
 			return numberFormats.EUR.currency;
 	}
 	return locale;
@@ -60,10 +60,10 @@ function DefaultCurrencyForLocale(locale) {
 
 function nonSpecificLocaleToDefaultSpecificLocale(locale) {
 	switch(locale) {
-		case CONSTANTS.locales.en_US.lang:
-			return CONSTANTS.locales.en_US.code;
-		case CONSTANTS.locales.nl_NL.lang:
-			return CONSTANTS.locales.nl_NL.code;
+		case CONSTANTS_LOCALES.en_US.lang:
+			return CONSTANTS_LOCALES.en_US.code;
+		case CONSTANTS_LOCALES.nl_NL.lang:
+			return CONSTANTS_LOCALES.nl_NL.code;
 	}
 	return locale;
 }
@@ -72,7 +72,7 @@ function nonSpecificLocaleToDefaultSpecificLocale(locale) {
 export function startClient() {
 	init({
 		...INIT_OPTIONS,
-		initialLocale: getCookie(CONSTANTS.cookies.locale) || nonSpecificLocaleToDefaultSpecificLocale(getLocaleFromNavigator()),
+		initialLocale: getCookie(CONSTANTS_COOKIES.locale) || nonSpecificLocaleToDefaultSpecificLocale(getLocaleFromNavigator()),
 	});
 }
 
@@ -91,7 +91,7 @@ export function i18nMiddleware() {
 			return;
 		}
 
-		let locale = getCookie(CONSTANTS.cookies.locale, req.headers.cookie);
+		let locale = getCookie(CONSTANTS_COOKIES.locale, req.headers.cookie);
 
 		// no cookie, let's get the first accepted language
 		if (locale == null) {
