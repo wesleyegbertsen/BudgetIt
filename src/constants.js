@@ -50,4 +50,3 @@ const CONSTANTS = {
     }
 }
 export { CONSTANTS };
-console.log(CONSTANTS);
