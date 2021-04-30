@@ -1,6 +1,7 @@
 <script>
 	import { _, locale, locales } from 'svelte-i18n';
-	import { Constants } from '../resources.js';
+	import { setCookie, getCookie } from '../modules/cookie.js';
+	import { CONSTANTS } from '../constants.js';
 	import { onMount } from 'svelte';
 	import Drawer, {
 		Content,
@@ -19,20 +20,28 @@
     export let open;
 
 	let innerWidth;
-	let isDesktopView = () => innerWidth >= Constants.ui.minimumDesktopWidth;
+	let isDesktopView = () => innerWidth >= CONSTANTS.ui.minimumDesktopWidth;
+	let currency = getCookie('currency');
 
 	onMount(async () => {
 		open = isDesktopView();
 	});
 
-	//When segment or $locale value changes, update navigation drawer open state
-	$: segment, $locale, open = isDesktopView();
+	function handleCurrencyChange() {
+		if (typeof window !== 'undefined') {
+			setCookie('currency', currency);
+		}
+	}
+
+	//When segment, currency or $locale value changes, update navigation drawer open state
+	$: segment, currency, $locale, open = isDesktopView();
+	$: currency, handleCurrencyChange();
 
 	//TODO: Hacky fix so the margin-right on the AppContent caused by the Drawer, doesn't cause the toolbar section of the TopAppBar to go out of view
 	$: if (typeof window !== 'undefined' && (open || !open) && innerWidth) {
 		document
 			.querySelector('.mdc-top-app-bar section[role=toolbar]')
-			.style.marginRight = (open && innerWidth >= Constants.ui.minimumDesktopWidth) ? '256px' : '0';
+			.style.marginRight = (open && innerWidth >= CONSTANTS.ui.minimumDesktopWidth) ? '256px' : '0';
 	}
 </script>
 
@@ -44,7 +53,7 @@
 			margin-top: 5px;
 		}
 
-		:global(.language-selector) {
+		:global(.mdc-select) {
 			display: flex;
 			margin: 8px;
 			padding: 0 8px 0 8px;
@@ -61,9 +70,9 @@
 
 <svelte:window bind:innerWidth/>
 
-<Drawer variant="{innerWidth >= Constants.ui.minimumDesktopWidth ? 'dismissible' : 'modal'}" bind:open>
+<Drawer variant="{innerWidth >= CONSTANTS.ui.minimumDesktopWidth ? 'dismissible' : 'modal'}" bind:open>
 	<Header>
-		<Title>{Constants.app.name}</Title>
+		<Title>{CONSTANTS.app.name}</Title>
 		<Subtitle>{$_('app.description')}</Subtitle>
 	</Header>
 	<Content><!--FIXME:Clicking items doesn't update <slot> with route, only updates URL (When <slot> is moved outside of <AppContent> it does work)-->
@@ -86,21 +95,29 @@
 		<Subheader component={H6}>{$_('nav.options')}</Subheader>
 
 		<!--FIXME: Selected value doesn't get updated to new language locale value right away-->
-		<div><Select bind:value={$locale} label="{$_('nav.language')}" class="language-selector {$locale}">
+		<div>
+		<Select bind:value={$locale} label="{$_('nav.language')}" class="language-selector {$locale}">
 			<Icon class="material-icons" slot="leadingIcon">language</Icon>
 			{#each $locales as item}
 				<Option value={item}>
-					<div><CountryFlagIcon class="flag-icon" language={item} /></div>
+					<div><CountryFlagIcon class="flag-icon" locale={item} /></div>
 					{$_('languages.' + item.replace('-', '_'))}
 				</Option>
 			{/each}
-		</Select></div>
+		</Select>
+		<Select bind:value={currency} label="Currency">
+			<Icon class="material-icons" slot="leadingIcon">payments</Icon>
+			{#each Object.values(CONSTANTS.currencies) as currency}
+				<Option value={currency.code}>{currency.code} - {currency.symbol}</Option>
+			{/each}
+		</Select>
+		</div>
 
 		</List>
 	</Content>
 </Drawer>
 
 <!--FIXME: Clicking Scrim when initial innerWidth is less than or equal to minimumDesktopWidth, won't dismiss navigation drawer-->
-{#if innerWidth <= Constants.ui.minimumDesktopWidth}
+{#if innerWidth <= CONSTANTS.ui.minimumDesktopWidth}
 	<Scrim/>
 {/if}

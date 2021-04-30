@@ -6,18 +6,17 @@ import {
 } from 'svelte-i18n';
 
 import { setCookie, getCookie } from './modules/cookie.js';
+import { CONSTANTS } from './constants.js';
+
+//Creating a list of number formats for i18n based of all defined currencies in CONSTANTS 
+let numberFormats = {};
+Object.values(CONSTANTS.currencies).forEach(currency => numberFormats[currency.code] = {style: 'currency', currency: currency.code});
 
 const INIT_OPTIONS = {
-	fallbackLocale: 'en-US',
+	fallbackLocale: CONSTANTS.locales.en_US.code,
 	initialLocale: null,
 	loadingDelay: 200,
-	formats: {
-		number: {//https://en.wikipedia.org/wiki/ISO_4217
-			USD: { style: 'currency', currency: 'USD' },
-			GBP: { style: 'currency', currency: 'GBP' },
-			EUR: { style: 'currency', currency: 'EUR' }
-		}
-	},
+	formats: {number: numberFormats},
 	warnOnMissingMessages: true,
 };
 
@@ -25,10 +24,12 @@ let currentLocale = null;
 
 //TODO: Might want to give en-US and en-GB && nl-NL and nl-BE a separate locale dictionary, since there are some nuanced differences.
 //https://stackoverflow.com/a/9713377
-register('en-US', () => import('./locales/en.json'));
-register('en-GB', () => import('./locales/en.json'));
-register('nl-NL', () => import('./locales/nl.json'));
-register('nl-BE', () => import('./locales/nl.json'));
+//Dynamic imports don't work, so the commented-out code below doesn't work
+//Object.values(CONSTANTS.locales).forEach(locale => register(locale.code, () => import(`./locales/${locale.lang}.json`)));
+register(CONSTANTS.locales.en_US.code, () => import('./locales/en.json'));
+register(CONSTANTS.locales.en_GB.code, () => import('./locales/en.json'));
+register(CONSTANTS.locales.nl_NL.code, () => import('./locales/nl.json'));
+register(CONSTANTS.locales.nl_BE.code, () => import('./locales/nl.json'));
 
 $locale.subscribe((value) => {
 	if (value == null) return;
@@ -37,15 +38,41 @@ $locale.subscribe((value) => {
 
 	// if running in the client, save the language preference in a cookie
 	if (typeof window !== 'undefined') {
-		setCookie('locale', value);
+		setCookie(CONSTANTS.cookies.locale, value);
+		if (!getCookie(CONSTANTS.cookies.currency)) {
+			setCookie(CONSTANTS.cookies.currency, DefaultCurrencyForLocale(value));
+		}
 	}
 });
+
+function DefaultCurrencyForLocale(locale) {
+	switch(locale) {
+		case CONSTANTS.locales.en_US.code:
+			return numberFormats.USD.currency;
+		case CONSTANTS.locales.en_GB.code:
+			return numberFormats.GBP.currency;
+		case CONSTANTS.locales.nl_NL.code:
+		case CONSTANTS.locales.nl_BE.code:
+			return numberFormats.EUR.currency;
+	}
+	return locale;
+}
+
+function nonSpecificLocaleToDefaultSpecificLocale(locale) {
+	switch(locale) {
+		case CONSTANTS.locales.en_US.lang:
+			return CONSTANTS.locales.en_US.code;
+		case CONSTANTS.locales.nl_NL.lang:
+			return CONSTANTS.locales.nl_NL.code;
+	}
+	return locale;
+}
 
 // initialize the i18n library in client
 export function startClient() {
 	init({
 		...INIT_OPTIONS,
-		initialLocale: getCookie('locale') || getLocaleFromNavigator(),
+		initialLocale: getCookie(CONSTANTS.cookies.locale) || nonSpecificLocaleToDefaultSpecificLocale(getLocaleFromNavigator()),
 	});
 }
 
@@ -64,14 +91,14 @@ export function i18nMiddleware() {
 			return;
 		}
 
-		let locale = getCookie('locale', req.headers.cookie);
+		let locale = getCookie(CONSTANTS.cookies.locale, req.headers.cookie);
 
 		// no cookie, let's get the first accepted language
 		if (locale == null) {
 			if (req.headers['accept-language']) {
 				const headerLang = req.headers['accept-language'].split(',')[0].trim();
 				if (headerLang.length > 1) {
-					locale = headerLang;
+					locale = nonSpecificLocaleToDefaultSpecificLocale(headerLang);
 				}
 			} else {
 				locale = INIT_OPTIONS.initialLocale || INIT_OPTIONS.fallbackLocale;

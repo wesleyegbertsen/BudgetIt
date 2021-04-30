@@ -7,7 +7,7 @@
 	import { Icon } from '@smui/common/styled';
 	import { mdiCashRegister, mdiWeatherSunny, mdiWeatherNight } from '@mdi/js';
 	import { goto } from '@sapper/app';
-	import { Constants } from '../resources.js'
+	import { CONSTANTS } from '../constants.js'
 
 	export let topAppBar = undefined;
 
@@ -48,7 +48,7 @@
 				<Icon component={Svg} viewBox="0 0 24 24" width=24 height=24>
 					<path fill="currentColor" d={mdiCashRegister} />
 				</Icon>
-				{Constants.app.name}
+				{CONSTANTS.app.name}
 			</Title>
 		</Section>
 		<Section align="end" toolbar>
