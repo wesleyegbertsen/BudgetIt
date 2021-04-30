@@ -4,10 +4,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "sapper dev",
-    "build": "sapper build --legacy",
-    "export": "sapper export --legacy",
-    "start": "node __sapper__/build"
+    "dev": "npm run genversion && sapper dev",
+    "build": "npm run genversion && sapper build --legacy",
+    "export": "npm run genversion && sapper export --legacy",
+    "start": "node __sapper__/build",
+    "genversion": "genversion --es6 --semi ./version.js"
   },
   "dependencies": {
     "compression": "^1.7.1",
@@ -37,6 +38,7 @@
     "@smui/select": "^4.0.0",
     "@smui/tooltip": "^4.0.0",
     "@smui/top-app-bar": "^4.0.0",
+    "genversion": "^2.3.1",
     "postcss": "^8.2.12",
     "rollup": "^2.3.4",
     "rollup-plugin-postcss": "^4.0.0",

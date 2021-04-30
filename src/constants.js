@@ -1,6 +1,9 @@
+import { version } from '~/version.js'
+
 const CONSTANTS = {
     app: {
-        name: 'BudgetIt'
+        name: 'BudgetIt',
+        version: version
     },
     ui: {
         minimumDesktopWidth: 720
@@ -47,3 +50,4 @@ const CONSTANTS = {
     }
 }
 export { CONSTANTS };
+console.log(CONSTANTS);
